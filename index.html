@@ -1272,7 +1272,13 @@
     function getProfileKeywords(profile) {
       const mapping = {
         startups: ["startup", "startups", "sme", "smes"],
-            let showOpenOnly = false;
+                universities: ["university", "universities", "lab", "labs", "research"],
+                government: ["government", "agency", "agencies", "public"],
+                investors: ["investor", "investors", "fund", "funds", "capital"]
+                      };
+          return mapping[profile] || [];
+      }
+            
 
     function parseDeadline(opportunity) {
       const deadlineType = (opportunity.deadline_type || "").toLowerCase();
