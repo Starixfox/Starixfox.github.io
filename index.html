@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudi Space Opportunity Hub | Futuristic Redesign</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@300;400;600&display=swap');
+        
+        body {
+            background-color: #050505;
+            color: #e5e7eb;
+            font-family: 'Space Grotesk', sans-serif;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
+            overflow-x: hidden;
+        }
 
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .star-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); border-color: rgba(34, 197, 94, 0.4); }
+        .glow-gold { box-shadow: 0 0 15px rgba(234, 179, 8, 0.3); border-color: rgba(234, 179, 8, 0.4); }
+        .glow-blue { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); border-color: rgba(56, 189, 248, 0.4); }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="star-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-white/10 px-6 py-4 mx-4 mt-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="orbitron text-xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                SAUDI SPACE HUB
+            </h1>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#overview" class="hover:text-blue-400 transition">Overview</a>
+                <a href="#opportunities" class="hover:text-blue-400 transition">Opportunities</a>
+                <a href="#insights" class="hover:text-blue-400 transition">Insights</a>
+                <a href="#about" class="hover:text-blue-400 transition">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="overview" class="max-w-7xl mx-auto px-6 pt-20 pb-16 text-center">
+        <h2 class="orbitron text-5xl md:text-7xl font-bold mb-6 tracking-tighter">
+            Exploring the <span class="text-blue-500">Saudi Space</span> Frontier
+        </h2>
+        <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+            A single-page hub to explore public funding, accelerators, and partnership opportunities across Saudi Arabia and the global space economy.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="glass glass-card p-8 glow-green text-center">
+                <div class="orbitron text-4xl font-bold text-green-400 mb-2">54</div>
+                <div class="text-sm tracking-widest uppercase text-gray-400">Saudi Opportunities</div>
+            </div>
+            <div class="glass glass-card p-8 glow-gold text-center">
+                <div class="orbitron text-4xl font-bold text-yellow-400 mb-2">23</div>
+                <div class="text-sm tracking-widest uppercase text-gray-400">GCC Regional</div>
+            </div>
+            <div class="glass glass-card p-8 glow-blue text-center">
+                <div class="orbitron text-4xl font-bold text-blue-400 mb-2">45</div>
+                <div class="text-sm tracking-widest uppercase text-gray-400">Global (Eligible)</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="opportunities" class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+            <div>
+                <h3 class="orbitron text-3xl font-bold mb-2">Active Opportunities</h3>
+                <p class="text-gray-400">Search and filter through the current space landscape.</p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+                <input type="text" placeholder="Search..." class="glass px-4 py-2 text-sm focus:outline-none focus:border-blue-500 min-w-[250px]">
+                <select class="glass px-4 py-2 text-sm focus:outline-none">
+                    <option>All Types</option>
+                    <option>Grant</option>
+                    <option>Tender</option>
+                    <option>Accelerator</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Opportunities Table -->
+        <div class="glass overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 bg-white/5">
+                            <th class="px-6 py-4 orbitron text-xs tracking-widest uppercase">Title</th>
+                            <th class="px-6 py-4 orbitron text-xs tracking-widest uppercase">Type</th>
+                            <th class="px-6 py-4 orbitron text-xs tracking-widest uppercase">Region</th>
+                            <th class="px-6 py-4 orbitron text-xs tracking-widest uppercase">Funding</th>
+                            <th class="px-6 py-4 orbitron text-xs tracking-widest uppercase">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="px-6 py-4">
+                                <div class="font-bold">CST SpaceUp Competition</div>
+                                <div class="text-xs text-gray-500">CST + Saudi Space Agency</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-blue-400">Tender</td>
+                            <td class="px-6 py-4 text-sm">Saudi Arabia</td>
+                            <td class="px-6 py-4 text-sm">~$28M</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-[10px] rounded bg-red-500/20 text-red-400 uppercase tracking-tighter">Closed</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="px-6 py-4">
+                                <div class="font-bold">EWC Space Tech Track</div>
+                                <div class="text-xs text-gray-500">CST + Monsha'at</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-purple-400">Accelerator</td>
+                            <td class="px-6 py-4 text-sm">Saudi Arabia</td>
+                            <td class="px-6 py-4 text-sm">$100K/winner</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-[10px] rounded bg-yellow-500/20 text-yellow-400 uppercase tracking-tighter">Recurring</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="px-6 py-4">
+                                <div class="font-bold">RDIA Research Grants</div>
+                                <div class="text-xs text-gray-500">RDIA</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-green-400">Grant</td>
+                            <td class="px-6 py-4 text-sm">Saudi Arabia</td>
+                            <td class="px-6 py-4 text-sm">Varies</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 text-[10px] rounded bg-green-500/20 text-green-400 uppercase tracking-tighter">Open</span>
+                            </td>
+                        </tr>
+                        <!-- Additional data can be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="mt-6 text-center text-sm text-gray-500">
+            Showing partial records for demonstration. Full database available in official portal.
+        </div>
+    </main>
+
+    <!-- Insights Section -->
+    <section id="insights" class="max-w-7xl mx-auto px-6 py-20 bg-gradient-to-b from-transparent to-blue-900/10">
+        <div class="text-center mb-16">
+            <h3 class="orbitron text-3xl font-bold mb-4">Market Insights</h3>
+            <p class="text-gray-400 max-w-2xl mx-auto">Visualizing the growth of the Saudi Space Sector under Vision 2030.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass p-10 flex flex-col items-center">
+                <i class="fas fa-chart-line text-4xl text-blue-500 mb-6"></i>
+                <h4 class="orbitron text-xl mb-4">Projected Growth</h4>
+                <p class="text-center text-gray-400 text-sm">The Saudi space market is projected to reach $31.6 billion by 2035.</p>
+            </div>
+            <div class="glass p-10 flex flex-col items-center">
+                <i class="fas fa-rocket text-4xl text-purple-500 mb-6"></i>
+                <h4 class="orbitron text-xl mb-4">Funding Committed</h4>
+                <p class="text-center text-gray-400 text-sm">Over $2.1 billion already committed to national programs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about" class="border-t border-white/10 mt-20 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="orbitron font-bold text-gray-400">SAUDI SPACE HUB</div>
+            <div class="text-xs text-gray-500 text-center md:text-right">
+                © 2026 Saudi Space Opportunity Hub. Curated public data.<br>
+                Aligned with Saudi Vision 2030 objectives.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
