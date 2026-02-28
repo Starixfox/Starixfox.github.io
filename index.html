@@ -1272,16 +1272,8 @@
     function getProfileKeywords(profile) {
       const mapping = {
         startups: ["startup", "startups", "sme", "smes"],
-                universities: ["university", "universities", "lab", "labs", "research"],
-                government: ["government", "agency", "agencies", "public"],
-                investors: ["investor", "investors", "fund", "funds", "capital"]
-                      };
-          return mapping[profile] || [];
-      }
-            
-
-    function parseDeadline(opportunity) {
-      const deadlineType = (opportunity.deadline_type || "").toLowerCase();
+                let showOpenOnly = false;
+                lineType = (opportunity.deadline_type || "").toLowerCase();
       const deadlineDate = opportunity.deadline_date || "";
       
       if (deadlineType === "rolling" || deadlineType === "open_call" || deadlineType === "recurring" || deadlineType === "ongoing") {
