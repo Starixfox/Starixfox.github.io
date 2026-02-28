@@ -1415,41 +1415,6 @@
         const dateMatch = text.match(/deadline[:\s]+([^,\.\n]+)/i);
         if (!dateMatch) return null;
 
-        const dateStr = dateMatch[1].trim();
-
-        // Try parsing common date formats
-        const formats = [
-              // Month DD, YYYY
-              /([a-z]+)\s+(\d{1,2}),?\s+(\d{4})/i,
-              // DD Month YYYY
-              /(\d{1,2})\s+([a-z]+)\s+(\d{4})/i,
-              // YYYY-MM-DD
-              /(\d{4})-(\d{2})-(\d{2})/,
-              // MM/DD/YYYY
-              /(\d{1,2})\/(\d{1,2})\/(\d{4})/
-            ];
-
-        for (const format of formats) {
-              const match = dateStr.match(format);
-              if (match) {
-                      try {
-                                const date = new Date(dateStr);
-                                if (!isNaN(date.getTime())) {
-                                            return date;
-                                          }
-                              } catch (e) {
-                                continue;
-                              }
-                    }
-            }
-        return null;
-      }
-
-    // Render table
-    function renderTable() {
-      const tbody = document.getElementById("opportunitiesTableBody");
-      tbody.innerHTML = "";
-
       const filtered = getFilteredOpportunities();
       document.getElementById("tableCount").textContent = filtered.length;
       
@@ -1526,26 +1491,6 @@
             // Deadline
             const deadlineTd = document.createElement("td");
             const deadline = parseDeadline(op.title || "");
-
-            if (deadline) {
-                    const today = new Date();
-                    today.setHours(0,0,0,0);
-                    const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-                    const isFuture = daysLeft >= 0;
-
-      const label = deadline.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + " (" + Math.abs(daysLeft) + " days " + (isFuture ? "left" : "ago") + ")";        const deadlineType = op.deadline_type || "";
-        const deadlineDate = op.deadline_date || "";
-        const parts = [];
-
-        if (deadlineType) parts.push(deadlineType.replace(/_/g, " "));
-        if (deadlineDate) parts.push(deadlineDate);
-
-        deadlineTd.textContent = parts.join(" – ") || "N/A";
-        tr.appendChild(deadlineTd);
-
-        tbody.appendChild(tr);
-      });
-    }
 
     // Prepare aggregated data for charts
     function computeTypeCounts(filteredList) {
