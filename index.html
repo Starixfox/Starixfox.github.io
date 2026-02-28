@@ -317,6 +317,26 @@
       color: #666;
       padding: 0.4rem 0.1rem 0;
     }
+    
+    /* Deadline styling */
+    .deadline-soon {
+      color: #c62828;
+      font-weight: 500;
+    }
+
+    .deadline-medium {
+      color: #ef6c00;
+      font-weight: 500;
+    }
+
+    .deadline-late {
+      color: #2e7d32;
+      font-weight: 500;
+    }
+
+    .deadline-neutral {
+      color: #666;
+    }
 
     /* Charts */
 
@@ -577,6 +597,13 @@
             <option value="other">other</option>
           </select>
         </div>
+        
+        <div class="filter-group" style="max-width: 280px;">
+          <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.85rem;">
+            <input type="checkbox" id="showOpenOnly" style="cursor: pointer;">
+            <span>Show only open or ongoing opportunities</span>
+          </label>
+        </div>
       </div>
 
       <div class="table-meta">
@@ -595,8 +622,7 @@
                 <th>Eligibility</th>
                 <th>Funding amount</th>
                 <th>Status</th>
-                <th>Deadline</th>
-              </tr>
+              <th>Deadline / Days left</th>              </tr>
             </thead>
             <tbody id="opportunitiesTableBody">
               <!-- Rows injected via JavaScript -->
@@ -1246,6 +1272,50 @@
     function getProfileKeywords(profile) {
       const mapping = {
         startups: ["startup", "startups", "sme", "smes"],
+            let showOpenOnly = false;
+
+    function parseDeadline(opportunity) {
+      const deadlineType = (opportunity.deadline_type || "").toLowerCase();
+      const deadlineDate = opportunity.deadline_date || "";
+      
+      if (deadlineType === "rolling" || deadlineType === "open_call" || deadlineType === "recurring" || deadlineType === "ongoing") {
+        return {
+          label: "Rolling / Ongoing",
+          daysLeft: null,
+          isFuture: true,
+          isFixed: false
+        };
+      }
+      
+      if (deadlineDate && deadlineDate.trim() !== "") {
+        const dateMatch = deadlineDate.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})/);
+        if (dateMatch) {
+          const months = {"Jan":0,"Feb":1,"Mar":2,"Apr":3,"May":4,"Jun":5,"Jul":6,"Aug":7,"Sep":8,"Oct":9,"Nov":10,"Dec":11};
+          const day = parseInt(dateMatch[1]);
+          const month = months[dateMatch[2]];
+          const year = parseInt(dateMatch[3]);
+          const deadline = new Date(year, month, day);
+          const today = new Date();
+          today.setHours(0,0,0,0);
+          const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+          const isFuture = daysLeft >= 0;
+          return {
+            label: day + " " + dateMatch[2] + " " + year,
+            daysLeft: daysLeft,
+            isFuture: isFuture,
+            isFixed: true
+          };
+        }
+      }
+      
+      return {
+        label: deadlineDate || "N/A",
+        daysLeft: null,
+        isFuture: true,
+        isFixed: false
+      };
+    }
+
         universities: ["university", "universities", "researchers", "researcher", "lab", "labs"],
         government: ["government", "ministry", "ministries"],
         investors: ["investor", "investors", "vc", "venture capital"]
@@ -1342,6 +1412,41 @@
       });
     }
 
+    // Parse deadline from opportunity text
+    function parseDeadline(text) {
+        const dateMatch = text.match(/deadline[:\s]+([^,\.\n]+)/i);
+        if (!dateMatch) return null;
+
+        const dateStr = dateMatch[1].trim();
+
+        // Try parsing common date formats
+        const formats = [
+              // Month DD, YYYY
+              /([a-z]+)\s+(\d{1,2}),?\s+(\d{4})/i,
+              // DD Month YYYY
+              /(\d{1,2})\s+([a-z]+)\s+(\d{4})/i,
+              // YYYY-MM-DD
+              /(\d{4})-(\d{2})-(\d{2})/,
+              // MM/DD/YYYY
+              /(\d{1,2})\/(\d{1,2})\/(\d{4})/
+            ];
+
+        for (const format of formats) {
+              const match = dateStr.match(format);
+              if (match) {
+                      try {
+                                const date = new Date(dateStr);
+                                if (!isNaN(date.getTime())) {
+                                            return date;
+                                          }
+                              } catch (e) {
+                                continue;
+                              }
+                    }
+            }
+        return null;
+      }
+
     // Render table
     function renderTable() {
       const tbody = document.getElementById("opportunitiesTableBody");
@@ -1419,9 +1524,18 @@
         statusTd.appendChild(buildStatusPill(op.status || ""));
         tr.appendChild(statusTd);
 
-        // Deadline (combine type + date)
-        const deadlineTd = document.createElement("td");
-        const deadlineType = op.deadline_type || "";
+
+            // Deadline
+            const deadlineTd = document.createElement("td");
+            const deadline = parseDeadline(op.title || "");
+
+            if (deadline) {
+                    const today = new Date();
+                    today.setHours(0,0,0,0);
+                    const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
+                    const isFuture = daysLeft >= 0;
+
+      const label = deadline.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + " (" + Math.abs(daysLeft) + " days " + (isFuture ? "left" : "ago") + ")";        const deadlineType = op.deadline_type || "";
         const deadlineDate = op.deadline_date || "";
         const parts = [];
 
