@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    :root :root {
-        --bg-primary: #0a0a0f;
+        :root {        --bg-primary: #0a0a0f;
         --bg-secondary: #101018;
         --bg-card: #14141e;
         --bg-card-hover: #1a1a28;
@@ -35,13 +34,13 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.5;
     }
 
     a {
-      color: var(--accent-color);
+      color: var(--accent-gold);
       text-decoration: none;
     }
 
@@ -68,7 +67,7 @@
     .navbar-title {
       font-weight: 600;
       font-size: 1rem;
-      color: var(--accent-color);
+      color: var(--accent-gold);
       white-space: nowrap;
     }
 
@@ -85,7 +84,7 @@
     }
 
     .navbar-links a:hover {
-      background-color: var(--accent-light);
+      background-color: var(--bg-card);
       text-decoration: none;
     }
 
@@ -149,11 +148,11 @@
     }
 
     .kpi-card {
-      background-color: var(--card-bg);
+      background-color: var(--bg-card);
       border-radius: 10px;
       padding: 0.9rem;
       border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
     }
 
     .kpi-label {
@@ -167,7 +166,7 @@
     .kpi-value {
       font-size: 1.4rem;
       font-weight: 600;
-      color: var(--accent-color);
+      color: var(--accent-gold);
     }
 
     .kpi-note {
@@ -210,7 +209,7 @@
 
     .filter-input:focus,
     .filter-select:focus {
-      border-color: var(--accent-color);
+      border-color: var(--accent-gold);
       box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.15);
     }
 
@@ -219,7 +218,7 @@
       border-radius: 8px;
       border: 1px solid var(--border-color);
       overflow: hidden;
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
     }
 
     .table-scroll {
@@ -304,7 +303,7 @@
       border-radius: 10px;
       border: 1px solid var(--border-color);
       padding: 1rem;
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
     }
 
     .chart-title {
@@ -338,7 +337,7 @@
       border-radius: 10px;
       border: 1px solid var(--border-color);
       padding: 1rem;
-      box-shadow: var(--shadow-soft);
+      box-shadow: none;
       font-size: 0.93rem;
     }
 
@@ -365,7 +364,7 @@
 
 /* Who is this for */
   .who-card {
-    background-color: var(--accent-light);
+    background-color: var(--bg-card);
     border-radius: 10px;
     border: 1px solid #bbdefb;
     padding: 1rem 1.2rem;
@@ -412,13 +411,13 @@
   }
   .feedback-form select:focus,
   .feedback-form textarea:focus {
-    border-color: var(--accent-color);
+    border-color: var(--accent-gold);
     box-shadow: 0 0 0 2px rgba(30,136,229,0.15);
   }
   .feedback-form button {
     margin-top: 0.7rem;
     padding: 0.45rem 1.1rem;
-    background-color: var(--accent-color);
+    background-color: var(--accent-gold);
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -435,8 +434,8 @@
       padding: 0.12rem 0.45rem;
       border-radius: 999px;
       font-size: 0.75rem;
-      background-color: var(--accent-light);
-      color: var(--accent-color);
+      background-color: var(--bg-card);
+      color: var(--accent-gold);
       margin-right: 0.25rem;
       margin-top: 0.15rem;
     }
