@@ -170,6 +170,45 @@
     .filters {
       display: flex;
       flex-wrap: wrap;
+      
+    .profile-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .profile-label {
+      font-weight: 500;
+      margin-right: 0.25rem;
+    }
+
+    .profile-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .profile-button {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background-color: #f5f7fb;
+      color: #333;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .profile-button.active {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
       gap: 0.75rem;
       align-items: center;
       margin-bottom: 1rem;
@@ -494,6 +533,17 @@
         Search and filter structured records of grants, tenders, accelerators, investment programs, fellowships, and ecosystem initiatives that touch the Saudi and GCC space economy.
       </p>
 
+            <div class="profile-bar">
+        <span class="profile-label">View opportunities for:</span>
+        <div class="profile-buttons">
+          <button class="profile-button active" data-profile="all">All</button>
+          <button class="profile-button" data-profile="startups">Startups / SMEs</button>
+          <button class="profile-button" data-profile="universities">Universities / Labs</button>
+          <button class="profile-button" data-profile="government">Government</button>
+          <button class="profile-button" data-profile="investors">Investors</button>
+        </div>
+      </div>
+
       <div class="filters">
         <div class="filter-group" style="flex: 2 1 260px;">
           <label for="searchInput" class="filter-label">Search by title</label>
@@ -530,7 +580,8 @@
       </div>
 
       <div class="table-meta">
-        Showing <span id="tableCount">0</span> opportunities. Use the search and dropdowns above to narrow down to specific segments or geographies.
+        <span id="profileSummary">Profile: All – 0 opportunities found</span>
+        <span> · Use the search and dropdowns above to narrow down to specific segments or geographies.</span>
       </div>
 
       <div class="table-container">
@@ -1190,6 +1241,27 @@
       }
     ];
 
+        let currentProfile = "all";
+
+    function getProfileKeywords(profile) {
+      const mapping = {
+        startups: ["startup", "startups", "sme", "smes"],
+        universities: ["university", "universities", "researchers", "researcher", "lab", "labs"],
+        government: ["government", "ministry", "ministries"],
+        investors: ["investor", "investors", "vc", "venture capital"]
+      };
+      return mapping[profile] || [];
+    }
+
+    function matchesProfile(opportunity, profile) {
+      if (profile === "all") return true;
+      const keywords = getProfileKeywords(profile);
+      if (!keywords.length) return true;
+      const entitiesString = (opportunity.eligibility_entities || "").toLowerCase();
+      return keywords.some(keyword => entitiesString.includes(keyword));
+    }
+
+
     // Helper: map ID to country group
     function getCountryGroupFromId(id) {
       if (id.startsWith("SA-")) return "saudi";
@@ -1263,8 +1335,10 @@
         const typeMatch =
           typeFilter === "all" ||
           (op.type || "").toLowerCase() === typeFilter.toLowerCase();
+        
+      const profileMatch = matchesProfile(op, currentProfile);
 
-        return titleMatch && countryMatch && typeMatch;
+        return titleMatch && countryMatch && typeMatch && profileMatch;
       });
     }
 
@@ -1275,6 +1349,18 @@
 
       const filtered = getFilteredOpportunities();
       document.getElementById("tableCount").textContent = filtered.length;
+      
+      const profileSummaryEl = document.getElementById("profileSummary");
+      if (profileSummaryEl) {
+        let profileLabel = "All";
+        if (currentProfile === "startups") profileLabel = "Startups / SMEs";
+        else if (currentProfile === "universities") profileLabel = "Universities / Labs";
+        else if (currentProfile === "government") profileLabel = "Government";
+        else if (currentProfile === "investors") profileLabel = "Investors";
+
+        profileSummaryEl.textContent = "Profile: " + profileLabel + " – " + filtered.length + " opportunities found";
+      }
+
 
       filtered.forEach(op => {
         const tr = document.createElement("tr");
@@ -1510,6 +1596,20 @@
           renderTable();
           renderCharts();
         });
+      
+      const profileButtons = document.querySelectorAll(".profile-button");
+      profileButtons.forEach(button => {
+        button.addEventListener("click", function () {
+          const selectedProfile = this.getAttribute("data-profile") || "all";
+          currentProfile = selectedProfile;
+
+          profileButtons.forEach(btn => btn.classList.remove("active"));
+          this.classList.add("active");
+
+          renderTable();
+          renderCharts();
+        });
+      });
     };
   </script>
 </body>
