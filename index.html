@@ -1271,48 +1271,6 @@
     function getProfileKeywords(profile) {
       const mapping = {
         startups: ["startup", "startups", "sme", "smes"],
-                let showOpenOnly = false;
-                lineType = (opportunity.deadline_type || "").toLowerCase();
-      const deadlineDate = opportunity.deadline_date || "";
-      
-      if (deadlineType === "rolling" || deadlineType === "open_call" || deadlineType === "recurring" || deadlineType === "ongoing") {
-        return {
-          label: "Rolling / Ongoing",
-          daysLeft: null,
-          isFuture: true,
-          isFixed: false
-        };
-      }
-      
-      if (deadlineDate && deadlineDate.trim() !== "") {
-        const dateMatch = deadlineDate.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})/);
-        if (dateMatch) {
-          const months = {"Jan":0,"Feb":1,"Mar":2,"Apr":3,"May":4,"Jun":5,"Jul":6,"Aug":7,"Sep":8,"Oct":9,"Nov":10,"Dec":11};
-          const day = parseInt(dateMatch[1]);
-          const month = months[dateMatch[2]];
-          const year = parseInt(dateMatch[3]);
-          const deadline = new Date(year, month, day);
-          const today = new Date();
-          today.setHours(0,0,0,0);
-          const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-          const isFuture = daysLeft >= 0;
-          return {
-            label: day + " " + dateMatch[2] + " " + year,
-            daysLeft: daysLeft,
-            isFuture: isFuture,
-            isFixed: true
-          };
-        }
-      }
-      
-      return {
-        label: deadlineDate || "N/A",
-        daysLeft: null,
-        isFuture: true,
-        isFixed: false
-      };
-    }
-
         universities: ["university", "universities", "researchers", "researcher", "lab", "labs"],
         government: ["government", "ministry", "ministries"],
         investors: ["investor", "investors", "vc", "venture capital"]
