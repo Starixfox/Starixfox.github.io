@@ -1444,6 +1444,327 @@ footer {
   .how-strip { grid-template-columns: 1fr; }
   footer { flex-direction: column; align-items: flex-start; }
 }
+
+/* =============================================
+   PROFILE CHIPS (filter)
+   ============================================= */
+.profile-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.profile-chip:hover {
+  border-color: var(--border-light);
+  color: var(--text);
+  background: var(--surface-3);
+}
+
+.profile-chip.active {
+  background: var(--green-highlight);
+  border-color: rgba(0, 166, 81, 0.4);
+  color: var(--green);
+}
+
+/* =============================================
+   DATASET UPDATE META BAR
+   ============================================= */
+.dataset-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.dataset-meta-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  animation: pulse 2.5s infinite;
+}
+
+.dataset-meta strong {
+  color: var(--text);
+}
+
+.dataset-meta .dataset-meta-sep {
+  color: var(--text-faint);
+}
+
+/* =============================================
+   EMPTY STATE
+   ============================================= */
+.table-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16) var(--space-8);
+  text-align: center;
+  gap: var(--space-3);
+}
+
+.table-empty-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.table-empty-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.table-empty-sub {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+  max-width: 38ch;
+  line-height: 1.6;
+}
+
+/* =============================================
+   SORTABLE TH
+   ============================================= */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  color: var(--text);
+  background: var(--surface-elevated);
+}
+
+th.sortable .sort-icon {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.4;
+  transition: opacity var(--transition), transform var(--transition);
+  font-style: normal;
+}
+
+th.sortable.sort-asc .sort-icon,
+th.sortable.sort-desc .sort-icon {
+  opacity: 1;
+  color: var(--green);
+}
+
+th.sortable.sort-desc .sort-icon {
+  transform: rotate(180deg);
+}
+
+/* =============================================
+   ABOUT CARD hover polish
+   ============================================= */
+.about-card {
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.about-card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* Services card accent */
+.about-card.services {
+  border-color: rgba(0, 166, 81, 0.2);
+  background: var(--surface);
+}
+
+.about-card.services:hover {
+  border-color: rgba(0, 166, 81, 0.4);
+}
+
+/* =============================================
+   NAV ACTIVE — underline indicator
+   ============================================= */
+.navbar-links a.active {
+  color: var(--green);
+  background-color: var(--green-highlight);
+  position: relative;
+}
+
+.navbar-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--green);
+  border-radius: 2px;
+}
+
+/* =============================================
+   LOADING SKELETON for table
+   ============================================= */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton-row td {
+  padding: var(--space-3) var(--space-4);
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 25%,
+    var(--surface-3) 50%,
+    var(--surface-2) 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* =============================================
+   PROFILE FILTER ROW
+   ============================================= */
+.filter-profile-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  border-top: 1px solid var(--divider);
+  padding-top: var(--space-4);
+  margin-top: var(--space-1);
+}
+
+.filter-profile-row .filter-label {
+  margin-bottom: var(--space-1);
+}
+
+/* =============================================
+   CHART SUBTITLE improvement
+   ============================================= */
+.chart-subtitle {
+  font-size: var(--text-xs);
+  color: var(--green);
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.01em;
+}
+
+/* =============================================
+   TOOLTIP — wider for region helper
+   ============================================= */
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-faint);
+  cursor: help;
+  margin-left: 3px;
+  vertical-align: middle;
+  transition: border-color var(--transition), color var(--transition);
+  font-style: normal;
+}
+
+.info-icon:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* =============================================
+   JUMP-TO-TOP button
+   ============================================= */
+.back-to-top {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--transition), transform var(--transition), color var(--transition), background-color var(--transition);
+  z-index: 200;
+  pointer-events: none;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  color: var(--green);
+  background: var(--surface-3);
+  border-color: var(--border-light);
+}
+
+/* =============================================
+   FOCUS RING POLISH
+   ============================================= */
+.profile-chip:focus-visible,
+.btn-filter-clear:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-submit:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* =============================================
+   RESPONSIVE TWEAKS
+   ============================================= */
+@media (max-width: 768px) {
+  .filter-group { min-width: 0; flex: 1 1 calc(50% - var(--space-3)); }
+  .filter-group.search { flex: 1 1 100%; }
+  .filter-actions { flex: 1 1 100%; justify-content: flex-end; }
+  .filter-profile-row { padding-top: var(--space-3); }
+  .back-to-top { bottom: var(--space-4); right: var(--space-4); }
+  .dataset-meta { font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+  .filter-group { flex: 1 1 100%; }
+}
 </style>
 </head>
 <body>
@@ -1592,6 +1913,7 @@ footer {
         <label for="countryFilter" class="filter-label">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7.1 12.4 7.7 13 .3.3.9.3 1.2 0 .6-.6 7.1-7.6 7.1-13a8 8 0 0 0-8-8z"/></svg>
           Country group
+          <span class="info-icon" data-tooltip="Saudi: programs from Saudi institutions. GCC: UAE, Oman, Qatar, Bahrain, Kuwait. Global: international programs open to Saudi actors.">i</span>
         </label>
         <select id="countryFilter" class="filter-select">
           <option value="all">All regions</option>
@@ -1631,12 +1953,35 @@ footer {
       </div>
 
       <div class="filter-actions">
-        <button class="btn-filter-clear" id="clearFilters" type="button">
-          Clear all
+        <button class="btn-filter-clear" id="clearFilters" type="button" title="Reset all filters to default">
+          ↺ Reset filters
         </button>
+      </div>
+
+      <div class="filter-profile-row">
+        <div class="filter-label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Quick filter by profile
+        </div>
+        <div class="profile-chips" id="profileChips" role="group" aria-label="Filter by profile">
+          <button class="profile-chip active" data-profile="all" type="button">All profiles</button>
+          <button class="profile-chip" data-profile="startup" type="button">🚀 Startup / SME</button>
+          <button class="profile-chip" data-profile="researcher" type="button">🎓 Researcher / University</button>
+          <button class="profile-chip" data-profile="government" type="button">🏛️ Government</button>
+          <button class="profile-chip" data-profile="investor" type="button">💼 Investor</button>
+          <button class="profile-chip" data-profile="student" type="button">📚 Student</button>
+        </div>
       </div>
     </div>
 
+    <div class="dataset-meta">
+      <div class="dataset-meta-dot"></div>
+      <span><strong>Last updated:</strong> March 2026 — prototype dataset</span>
+      <span class="dataset-meta-sep">·</span>
+      <span>Not an official government source</span>
+      <span class="dataset-meta-sep">·</span>
+      <span>Always verify on official links before applying</span>
+    </div>
     <div class="table-info">
       <span>
         Showing <strong id="tableCount">—</strong> of <strong id="tableTotal">—</strong> opportunities
@@ -1650,9 +1995,9 @@ footer {
         <table>
           <thead>
             <tr>
-              <th>Title</th>
+              <th class="sortable" data-col="title" id="thTitle">Title <span class="sort-icon" aria-hidden="true">↑</span></th>
               <th>Type</th>
-              <th>Country</th>
+              <th class="sortable" data-col="country" id="thCountry">Country <span class="sort-icon" aria-hidden="true">↑</span></th>
               <th>Eligibility</th>
               <th>Funding</th>
               <th>Status</th>
@@ -1660,7 +2005,11 @@ footer {
             </tr>
           </thead>
           <tbody id="opportunitiesTableBody" aria-live="polite">
-            <!-- Injected by JS -->
+            <tr class="skeleton-row"><td><div class="skeleton-line" style="width:80%"></div></td><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td><td><div class="skeleton-line" style="width:65%"></div></td><td><div class="skeleton-line" style="width:55%"></div></td><td><div class="skeleton-line" style="width:50%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td></tr>
+            <tr class="skeleton-row"><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td><td><div class="skeleton-line" style="width:65%"></div></td><td><div class="skeleton-line" style="width:55%"></div></td><td><div class="skeleton-line" style="width:50%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td></tr>
+            <tr class="skeleton-row"><td><div class="skeleton-line" style="width:85%"></div></td><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td><td><div class="skeleton-line" style="width:65%"></div></td><td><div class="skeleton-line" style="width:55%"></div></td><td><div class="skeleton-line" style="width:50%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td></tr>
+            <tr class="skeleton-row"><td><div class="skeleton-line" style="width:75%"></div></td><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td><td><div class="skeleton-line" style="width:65%"></div></td><td><div class="skeleton-line" style="width:55%"></div></td><td><div class="skeleton-line" style="width:50%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td></tr>
+            <tr class="skeleton-row"><td><div class="skeleton-line" style="width:90%"></div></td><td><div class="skeleton-line" style="width:70%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td><td><div class="skeleton-line" style="width:65%"></div></td><td><div class="skeleton-line" style="width:55%"></div></td><td><div class="skeleton-line" style="width:50%"></div></td><td><div class="skeleton-line" style="width:60%"></div></td></tr>
           </tbody>
         </table>
       </div>
@@ -1681,8 +2030,9 @@ footer {
     <div class="charts-grid-2">
       <div class="chart-card">
         <div class="chart-header">
+          <div class="chart-subtitle">Distribution overview</div>
           <div class="chart-title">Opportunities by type</div>
-          <div class="chart-desc">Count of records per opportunity type in the current dataset</div>
+          <div class="chart-desc">How many programs fall into each category. Use this to find where most funding options cluster.</div>
         </div>
         <div class="chart-wrap">
           <canvas id="typeChart" role="img" aria-label="Bar chart showing opportunities by type"></canvas>
@@ -1694,8 +2044,9 @@ footer {
 
       <div class="chart-card">
         <div class="chart-header">
+          <div class="chart-subtitle">Who can apply</div>
           <div class="chart-title">Opportunities by eligibility region</div>
-          <div class="chart-desc">Share of programs by who can apply: Saudi only, GCC, or global</div>
+          <div class="chart-desc">Which share of programs is open to Saudi-only, GCC-wide, or global applicants. Mix all three for broadest coverage.</div>
         </div>
         <div class="chart-wrap">
           <canvas id="regionChart" role="img" aria-label="Donut chart showing opportunities by eligibility region"></canvas>
@@ -1710,8 +2061,9 @@ footer {
     <div class="charts-grid-2">
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Chart A — Funding focus by geography</div>
-          <div class="chart-desc">Distribution of opportunity types broken down by Saudi, GCC, and Global origin</div>
+          <div class="chart-subtitle">Geography × program type</div>
+          <div class="chart-title">Funding focus by geography</div>
+          <div class="chart-desc">See how grants, accelerators, tenders, and fellowships are distributed across Saudi, GCC, and Global programs.</div>
         </div>
         <div class="chart-wrap" style="min-height: 280px;">
           <canvas id="geoChart" role="img" aria-label="Stacked bar chart showing funding types by geography"></canvas>
@@ -1723,8 +2075,9 @@ footer {
 
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Chart B — Status and timing</div>
-          <div class="chart-desc">Open, closed-but-recurring, and closed programs — and deadline patterns</div>
+          <div class="chart-subtitle">Activity snapshot</div>
+          <div class="chart-title">Status and timing</div>
+          <div class="chart-desc">How many programs are currently open, due to recur, or closed. Recurring programs are worth bookmarking for the next cycle.</div>
         </div>
         <div class="chart-wrap">
           <canvas id="statusChart" role="img" aria-label="Bar chart showing opportunity status breakdown"></canvas>
@@ -1739,8 +2092,9 @@ footer {
     <div class="charts-grid-2">
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Chart C — Ticket size distribution</div>
-          <div class="chart-desc">Opportunities bucketed by approximate funding range (where publicly known)</div>
+          <div class="chart-subtitle">Funding range</div>
+          <div class="chart-title">Ticket size distribution</div>
+          <div class="chart-desc">Funding ranges across programs. Many Saudi programs don't disclose amounts publicly — "Variable/Undisclosed" is common but programs are still worth applying to.</div>
         </div>
         <div class="chart-wrap">
           <canvas id="ticketChart" role="img" aria-label="Bar chart showing ticket size distribution"></canvas>
@@ -1752,8 +2106,9 @@ footer {
 
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Chart D — Target audience mix</div>
-          <div class="chart-desc">Approximate split of who each program primarily serves</div>
+          <div class="chart-subtitle">Who each program targets</div>
+          <div class="chart-title">Target audience mix</div>
+          <div class="chart-desc">The primary audience for each tracked program. Most opportunities are startup-facing, but research and government tracks are growing fast.</div>
         </div>
         <div class="chart-wrap">
           <canvas id="audienceChart" role="img" aria-label="Donut chart showing target audience distribution"></canvas>
@@ -1842,6 +2197,19 @@ footer {
           <li>Manual research and periodic updates. This is not an official CST or government website.</li>
         </ul>
         <p style="margin-top: var(--space-3); font-style: italic; color: var(--text-faint); font-size: var(--text-xs);">Dataset updated periodically. Always verify details and check the official link before applying.</p>
+      </div>
+
+      <div class="about-card services">
+        <div class="about-card-icon">🤝</div>
+        <h3>Services for organisations</h3>
+        <p>The Saudi Space Opportunity Hub can be adapted for institutional and partner use:</p>
+        <ul>
+          <li><strong>White-label deployment</strong> — embed a branded version within your organisation's portal or intranet.</li>
+          <li><strong>Maintained dataset</strong> — regular additions, deadline tracking, and status updates as programs open or recur.</li>
+          <li><strong>Custom filters and segments</strong> — tailored views for your specific audience (e.g., university tech transfer, government procurement).</li>
+          <li><strong>API or data export</strong> — structured dataset delivery for integration with CRMs, portals, or internal tools.</li>
+        </ul>
+        <p>Interested? <a href="mailto:contact@saudispacehub.com" style="color: var(--green);">Get in touch →</a></p>
       </div>
     </div>
   </section>
@@ -2070,6 +2438,18 @@ updateKPIs(opportunities);
 // TABLE
 // ============================================================
 let filteredData = [...opportunities];
+let activeProfile = 'all';
+let sortCol = null;
+let sortDir = 1; // 1=asc, -1=desc
+
+// Profile → eligibility_entities keywords map
+const profileMap = {
+  'startup': ['startup', 'sme', 'company', 'firm', 'venture', 'enterprise'],
+  'researcher': ['research', 'university', 'universities', 'academic', 'professor', 'faculty'],
+  'government': ['government', 'public', 'ministry', 'agency', 'institution'],
+  'investor': ['investor', 'fund', 'vc', 'venture capital'],
+  'student': ['student']
+};
 
 function renderTable(data) {
   const tbody = document.getElementById('opportunitiesTableBody');
@@ -2082,7 +2462,11 @@ function renderTable(data) {
   if (!tbody) return;
 
   if (data.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 2.5rem; color: var(--text-muted); font-style: italic;">No opportunities match your filters. Try adjusting the search or dropdowns.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="padding:0; border:none;"><div class="table-empty">
+      <div class="table-empty-icon">🔭</div>
+      <div class="table-empty-title">No opportunities match your filters</div>
+      <div class="table-empty-sub">Try clearing some filters, switching profile, or broadening the region and type selection.</div>
+    </div></td></tr>`;
     return;
   }
 
@@ -2131,8 +2515,24 @@ function applyFilters() {
     const matchType = type === 'all' || opp.type === type;
     const matchStatus = status === 'all' || opp.status === status;
 
-    return matchSearch && matchCountry && matchType && matchStatus;
+    let matchProfile = true;
+    if (activeProfile !== 'all') {
+      const keywords = profileMap[activeProfile] || [];
+      const elig = (opp.eligibility_entities || '').toLowerCase();
+      matchProfile = keywords.some(k => elig.includes(k));
+    }
+
+    return matchSearch && matchCountry && matchType && matchStatus && matchProfile;
   });
+
+  // Apply sort
+  if (sortCol) {
+    filteredData = [...filteredData].sort((a, b) => {
+      const av = (a[sortCol] || '').toLowerCase();
+      const bv = (b[sortCol] || '').toLowerCase();
+      return av < bv ? -sortDir : av > bv ? sortDir : 0;
+    });
+  }
 
   renderTable(filteredData);
 }
@@ -2148,6 +2548,11 @@ document.getElementById('clearFilters')?.addEventListener('click', () => {
     const el = document.getElementById(id);
     if (el) el.value = id === 'searchInput' ? '' : 'all';
   });
+  // Reset profile chips
+  document.querySelectorAll('.profile-chip').forEach(c => c.classList.remove('active'));
+  const allChip = document.querySelector('.profile-chip[data-profile="all"]');
+  if (allChip) allChip.classList.add('active');
+  activeProfile = 'all';
   applyFilters();
 });
 
@@ -2700,7 +3105,60 @@ document.getElementById('feedbackForm')?.addEventListener('submit', function(e) 
     setTimeout(() => { success.style.display = 'none'; }, 5000);
   }
 });
+
+// ============================================================
+// PROFILE CHIPS
+// ============================================================
+document.querySelectorAll('.profile-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.profile-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    activeProfile = this.dataset.profile;
+    applyFilters();
+  });
+});
+
+// ============================================================
+// SORTABLE TABLE HEADERS
+// ============================================================
+document.querySelectorAll('th.sortable').forEach(th => {
+  th.addEventListener('click', function() {
+    const col = this.dataset.col;
+    if (sortCol === col) {
+      sortDir *= -1;
+    } else {
+      sortCol = col;
+      sortDir = 1;
+    }
+    document.querySelectorAll('th.sortable').forEach(h => {
+      h.classList.remove('sort-asc', 'sort-desc');
+    });
+    this.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+    applyFilters();
+  });
+});
+
+// ============================================================
+// BACK TO TOP
+// ============================================================
+(function() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
 </script>
 
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
 </body>
 </html>
